@@ -1,3 +1,4 @@
+// база данных для товаров - Items database
 const data = [
     { id: 123, title: 'Молоко', price: 100, src: 'https://cdn.onlinewebfonts.com/svg/img_85921.png' },
     { id: 321, title: 'Шоколад', price: 50, src: 'https://avatars.mds.yandex.net/i?id=3f0a43e96711cf9f8e51a21d219e43181163cdbb-12544737-images-thumbs&n=13' },
@@ -7,6 +8,7 @@ const data = [
     { id: 122, title: 'Сыр', price: 250, src: 'https://i.pinimg.com/736x/62/e1/c1/62e1c1590c0792a42670e62070181b62.jpg' },
 ]
 
+// объявление переменных
 let cart = []
 const form = document.querySelector('.form')
 const cartUI = document.querySelector('.cart')
@@ -18,6 +20,7 @@ const searchInput = document.querySelector('.searchInput')
 const idInput = document.querySelector('input[name="id"]')
 const suggestions = document.createElement('div')
 
+//styles for suggestions - стили для подсказчика
 suggestions.style.position = 'absolute'
 suggestions.style.backgroundColor = '#fff'
 suggestions.style.border = '1px solid #ccc'
@@ -27,6 +30,7 @@ suggestions.style.overflowY = 'auto'
 suggestions.style.zIndex = '1000'
 form.appendChild(suggestions)
 
+// функция для подсказки ввода id товара - function for suggestion input id of item
 idInput.addEventListener('input', (e) => {
     const inputValue = e.target.value.trim()
     if (inputValue.length > 0) {
@@ -62,12 +66,17 @@ document.addEventListener('click', (e) => {
     }
 })
 
+// функция для получения стоимости товара - function for getting full price for item*count
 const getItemData = (item) => {
     return item.count ? `${item.title} ---------- ${item.price * item.count}р \n` : `${item.title} ---------- ${item.price}р \n`
 }
 
+
+// Создание и печать чека  -  Creating and print receipt
 const printTotal = (cart) => {
     const receiptWindow = document.createElement('div')
+
+    //styles for receipt - стили для чека
     receiptWindow.style.position = 'fixed'
     receiptWindow.style.top = '20%'
     receiptWindow.style.left = '50%'
@@ -78,7 +87,10 @@ const printTotal = (cart) => {
     receiptWindow.style.fontFamily = 'monospace'
     receiptWindow.style.fontSize = '14px'
     receiptWindow.style.whiteSpace = 'pre'
-    document.body.appendChild(receiptWindow)
+    receiptWindow.style.zIndex = '1'
+    suggestions.style.zIndex = '0'
+
+    document.body.appendChild(фцreceiptWindow)
 
     const receiptNumber = Math.floor(Math.random() * 100000)
     const date = new Date()
@@ -130,6 +142,7 @@ const printTotal = (cart) => {
     printLine()
 }
 
+
 const getItem = (item) => {
     const element = cart.find(el => el.id === item.id)
     if (element) {
@@ -156,6 +169,7 @@ print.addEventListener('click', () => {
     printTotal(cart)
 })
 
+//Размещение товара в корзине. - setting item in the cart
 const setItemInUICart = (item) => {
     const itemUI = document.createElement('div')
     itemUI.style.display = 'flex'
