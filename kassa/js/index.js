@@ -90,7 +90,7 @@ const printTotal = (cart) => {
     receiptWindow.style.zIndex = '1'
     suggestions.style.zIndex = '0'
 
-    document.body.appendChild(фцreceiptWindow)
+    document.body.appendChild(receiptWindow)
 
     const receiptNumber = Math.floor(Math.random() * 100000)
     const date = new Date()
